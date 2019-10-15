@@ -1,0 +1,53 @@
+package com.mikelau.notes.ui.notes
+
+import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.mikelau.notes.base.BaseViewModel
+import com.mikelau.notes.data.local.NoteLocalRepository
+import com.mikelau.notes.data.models.Note
+import com.mikelau.notes.data.remote.NoteRemoteRepository
+import com.mikelau.notes.util.SingleLiveEvent
+import com.mikelau.notes.util.UseCaseResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+class NoteViewModel(application: Application, private val repository: NoteRemoteRepository) : BaseViewModel() {
+
+    private val localRepository: NoteLocalRepository = NoteLocalRepository(application)
+    private val allNotes: LiveData<List<Note>>
+
+    val notesList = MutableLiveData<List<Note>>()
+    val showLoading = MutableLiveData<Boolean>()
+    val showError = SingleLiveEvent<String>()
+
+    init {
+        allNotes = localRepository.getAllNotes()
+        loadNotes()
+    }
+
+    fun insert(note: Note) = localRepository.insert(note)
+
+    fun update(note: Note) = localRepository.update(note)
+
+    fun delete(note: Note) = localRepository.delete(note)
+
+    fun deleteAllNotes() = localRepository.deleteAllNotes()
+
+    fun getAllNotes(): LiveData<List<Note>> {
+        return allNotes
+    }
+
+    private fun loadNotes() {
+        showLoading.value = true
+        launch {
+            val result = withContext(Dispatchers.IO) { repository.getNotes() }
+            showLoading.value = false
+            when (result) {
+                is UseCaseResult.Success -> notesList.value = result.data
+                is UseCaseResult.Error -> showError.value = result.exception.message
+            }
+        }
+    }
+}
