@@ -17,8 +17,8 @@ class NoteViewModel(application: Application, private val repository: NoteRemote
 
     private val localRepository: NoteLocalRepository = NoteLocalRepository(application)
     private val allNotes: LiveData<List<Note>>
+    private val notesList = MutableLiveData<List<Note>>()
 
-    val notesList = MutableLiveData<List<Note>>()
     val showLoading = MutableLiveData<Boolean>()
     val showError = SingleLiveEvent<String>()
 
@@ -27,13 +27,13 @@ class NoteViewModel(application: Application, private val repository: NoteRemote
         loadNotes()
     }
 
-    fun insert(note: Note) = localRepository.insert(note)
+    fun insert(note: Note) = launch(coroutineContext) { localRepository.insert(note) }
 
-    fun update(note: Note) = localRepository.update(note)
+    fun update(note: Note) = launch(coroutineContext) { localRepository.update(note) }
 
-    fun delete(note: Note) = localRepository.delete(note)
+    fun delete(note: Note) = launch(coroutineContext) { localRepository.delete(note) }
 
-    fun deleteAllNotes() = localRepository.deleteAllNotes()
+    fun deleteAllNotes() = launch(coroutineContext) { localRepository.deleteAllNotes() }
 
     fun getAllNotes(): LiveData<List<Note>> {
         return allNotes

@@ -45,7 +45,7 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteHolder>(DiffCallback()) {
     inner class NoteHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         init {
             itemView.setOnClickListener {
-                onItemClick?.invoke(getItem(position))
+                onItemClick?.invoke(getItem(adapterPosition))
             }
         }
     }
