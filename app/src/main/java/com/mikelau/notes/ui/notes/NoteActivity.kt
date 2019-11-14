@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mikelau.notes.R
 import kotlinx.android.synthetic.main.activity_note.*
@@ -20,12 +19,9 @@ class NoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
 
-        npPriority.minValue = 1
-        npPriority.maxValue = 10
-
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_close)
 
-        if(intent.hasExtra(EXTRA_ID)) {
+        if (intent.hasExtra(EXTRA_ID)) {
             title = "Edit Note"
             etTitle.setText(intent.getStringExtra(EXTRA_TITLE))
             etDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
@@ -54,8 +50,13 @@ class NoteActivity : AppCompatActivity() {
         val description = etDescription.text.toString()
         val priority = npPriority.value
 
-        if (title.isBlank() || description.isBlank()) {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        if (title.isBlank()) {
+            tilTitle.error = "Title is required"
+            return
+        }
+
+        if (description.isBlank()) {
+            tilDescription.error = "Description is required"
             return
         }
 
@@ -65,7 +66,7 @@ class NoteActivity : AppCompatActivity() {
         data.putExtra(EXTRA_PRIORITY, priority)
 
         val id = intent.getIntExtra(EXTRA_ID, -1)
-        if(id != -1) data.putExtra(EXTRA_ID, id)
+        if (id != -1) data.putExtra(EXTRA_ID, id)
 
         setResult(RESULT_OK, data)
         finish()

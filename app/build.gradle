@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
 
     // SquareUp
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'
@@ -75,6 +75,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    // Widgets
+    implementation "com.shawnlin:number-picker:2.4.8"
 
     // Testing
     testImplementation 'junit:junit:4.12'

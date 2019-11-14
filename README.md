@@ -1,4 +1,4 @@
-# Android Architecture / Stack Reference Example
+# 🚧 (Under Construction) 👷‍⛏👷🔧️👷🔧 🚧  Android Architecture / Stack Reference Example
 
 > A simple example of what we can do / use in Android Architecture / 3rd party tools that can help us build the next big thing
 

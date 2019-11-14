@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         // Show Progress Bar
         noteViewModel.showLoading.observe(this, Observer { showLoading ->
-            mainProgressBar.visibility = if (showLoading!!) View.VISIBLE else View.GONE
+            mainProgressBar.visibility = if (showLoading!! && adapter.itemCount <= 0) View.VISIBLE else View.GONE
         })
 
         // Show Error
