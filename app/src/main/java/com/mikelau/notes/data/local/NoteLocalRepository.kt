@@ -9,11 +9,11 @@ import kotlinx.coroutines.launch
 
 class NoteLocalRepository(application: Application) {
 
+    private val database = NoteDatabase.getInstance(application)
     private val noteDao: NoteDao
     private val allNotes: LiveData<List<Note>>
 
     init {
-        val database = NoteDatabase.getInstance(application)
         noteDao = database.noteDao()
         allNotes = noteDao.allNotes
     }
@@ -27,5 +27,7 @@ class NoteLocalRepository(application: Application) {
     fun deleteAllNotes() = GlobalScope.launch(Dispatchers.IO) { noteDao.deleteAllNotes() }
 
     fun getAllNotes(): LiveData<List<Note>> { return allNotes }
+
+    fun close() { if (database.isOpen) database.close() }
 
 }

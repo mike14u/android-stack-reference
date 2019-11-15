@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/noteListFragment">
+
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="com.mikelau.notes.ui.fragments.NoteListFragment"
+        android:label="Notes"
+        tools:layout="@layout/fragment_note_list">
+        <action
+            android:id="@+id/createNote"
+            app:destination="@id/noteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.mikelau.notes.ui.fragments.NoteFragment"
+        android:label="Notes">
+        <argument android:name="NOTE_ID" app:argType="integer" android:defaultValue="0" />
+        <argument android:name="NOTE_TITLE" app:argType="string" android:defaultValue="@null" app:nullable="true" />
+        <argument android:name="NOTE_DESCRIPTION" app:argType="string" android:defaultValue="@null" app:nullable="true" />
+        <argument android:name="NOTE_PRIORITY" app:argType="integer" android:defaultValue="0" />
+    </fragment>
+
+</navigation>

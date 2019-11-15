@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 androidExtensions {
     experimental = true
 }
@@ -11,7 +12,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mikelau.notes"
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0.0"
@@ -46,6 +47,7 @@ dependencies {
     def retrofit_version = '2.6.2'
     def moshi_version = '1.8.0'
     def koin_version = '2.0.1'
+    def nav_version = '2.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -55,6 +57,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // SquareUp
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'

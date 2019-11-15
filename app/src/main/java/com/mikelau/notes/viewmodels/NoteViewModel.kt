@@ -1,6 +1,7 @@
-package com.mikelau.notes.ui.notes
+package com.mikelau.notes.viewmodels
 
 import android.app.Application
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mikelau.notes.base.BaseViewModel
@@ -13,7 +14,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class NoteViewModel(application: Application, private val repository: NoteRemoteRepository) : BaseViewModel() {
+class NoteViewModel(application: Application, private val repository: NoteRemoteRepository) :
+    BaseViewModel() {
+
+    var profileName = ObservableField("")
+    var profileEmail = ObservableField("")
 
     private val localRepository: NoteLocalRepository = NoteLocalRepository(application)
     private val allNotes: LiveData<List<Note>>
@@ -35,9 +40,9 @@ class NoteViewModel(application: Application, private val repository: NoteRemote
 
     fun deleteAllNotes() = launch(coroutineContext) { localRepository.deleteAllNotes() }
 
-    fun getAllNotes(): LiveData<List<Note>> {
-        return allNotes
-    }
+    fun closeDb() { localRepository.close() }
+
+    fun getAllNotes(): LiveData<List<Note>> { return allNotes }
 
     private fun loadNotes() {
         showLoading.value = true
@@ -50,4 +55,15 @@ class NoteViewModel(application: Application, private val repository: NoteRemote
             }
         }
     }
+
+    fun saveNote(title: String, description: String, priority: Int) {
+        insert(Note(title, description, priority))
+    }
+
+    fun modifyNote(title: String, description: String, priority: Int, id: Int) {
+        val note = Note(title, description, priority)
+        note.id = id
+        update(note)
+    }
+
 }

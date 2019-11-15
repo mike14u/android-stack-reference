@@ -3,9 +3,9 @@ package com.mikelau.notes.modules
 import com.mikelau.notes.data.remote.ApiService
 import com.mikelau.notes.data.remote.NoteRemoteRepository
 import com.mikelau.notes.data.remote.NoteRemoteRepositoryImpl
-import com.mikelau.notes.ui.notes.NoteViewModel
 import com.mikelau.notes.util.BASE_URL
 import com.mikelau.notes.util.LoggingInterceptor
+import com.mikelau.notes.viewmodels.NoteViewModel
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

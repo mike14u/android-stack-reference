@@ -1,4 +1,4 @@
-package com.mikelau.notes.ui.notes
+package com.mikelau.notes.ui.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -20,12 +20,18 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteHolder>(DiffCallback()) {
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         val currentNote: Note = getItem(position)
         holder.tvTitle.text = currentNote.title
-        holder.tvDescription.text= currentNote.description
+        holder.tvDescription.text = currentNote.description
         holder.viewPriority.setBackgroundColor(Color.parseColor(getColorPriority(currentNote.priority)))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
-        return NoteHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false))
+        return NoteHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_note,
+                parent,
+                false
+            )
+        )
     }
 
     fun getNote(position: Int): Note {
@@ -44,7 +50,8 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteHolder>(DiffCallback()) {
         }
     }
 
-    inner class NoteHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    inner class NoteHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
         init {
             itemView.setOnClickListener {
                 onItemClick?.invoke(getItem(adapterPosition))
