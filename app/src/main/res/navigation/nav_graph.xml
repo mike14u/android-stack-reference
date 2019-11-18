@@ -22,6 +22,7 @@
         <argument android:name="NOTE_ID" app:argType="integer" android:defaultValue="0" />
         <argument android:name="NOTE_TITLE" app:argType="string" android:defaultValue="@null" app:nullable="true" />
         <argument android:name="NOTE_DESCRIPTION" app:argType="string" android:defaultValue="@null" app:nullable="true" />
+        <argument android:name="NOTE_IMAGE" app:argType="string" android:defaultValue="@null" app:nullable="true" />
         <argument android:name="NOTE_PRIORITY" app:argType="integer" android:defaultValue="0" />
     </fragment>
 

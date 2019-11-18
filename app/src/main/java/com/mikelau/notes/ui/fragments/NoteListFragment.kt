@@ -50,6 +50,7 @@ class NoteListFragment : Fragment(R.layout.fragment_note_list) {
                 note.id,
                 note.title,
                 note.description,
+                note.image,
                 note.priority
             ))
         }
@@ -65,8 +66,7 @@ class NoteListFragment : Fragment(R.layout.fragment_note_list) {
 
         // Show Progress Bar
         noteViewModel.showLoading.observe(activity!!, Observer { showLoading ->
-            mainProgressBar?.visibility =
-                if (showLoading!!) View.VISIBLE else View.GONE
+            mainProgressBar?.visibility = if (showLoading!!) View.VISIBLE else View.GONE
         })
 
         // Show Error

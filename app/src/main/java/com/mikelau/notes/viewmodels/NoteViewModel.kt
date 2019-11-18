@@ -56,12 +56,12 @@ class NoteViewModel(application: Application, private val repository: NoteRemote
         }
     }
 
-    fun saveNote(title: String, description: String, priority: Int) {
-        insert(Note(title, description, priority))
+    fun saveNote(title: String, description: String, image: String, priority: Int) {
+        insert(Note(title, description, image, priority))
     }
 
-    fun modifyNote(title: String, description: String, priority: Int, id: Int) {
-        val note = Note(title, description, priority)
+    fun modifyNote(title: String, description: String, image: String, priority: Int, id: Int) {
+        val note = Note(title, description, image, priority)
         note.id = id
         update(note)
     }

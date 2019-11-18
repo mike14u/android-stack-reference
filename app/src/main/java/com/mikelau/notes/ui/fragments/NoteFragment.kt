@@ -24,6 +24,7 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         if(args.NOTEID > 0) {
             etTitle.setText(args.NOTETITLE)
             etDescription.setText(args.NOTEDESCRIPTION)
+            etImage.setText(args.NOTEIMAGE)
             npPriority.value = args.NOTEPRIORITY
         }
 
@@ -31,12 +32,12 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
             (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(getView()?.windowToken, 0)
             if(args.NOTEID > 0) {
                 noteViewModel.modifyNote(etTitle.text.toString(),
-                    etDescription.text.toString(),
+                    etDescription.text.toString(), etImage.text.toString(),
                     npPriority.value,
                     args.NOTEID)
                 Snackbar.make(view, R.string.message_note_updated, Snackbar.LENGTH_LONG).show()
             } else  {
-                noteViewModel.saveNote(etTitle.text.toString(), etDescription.text.toString(), npPriority.value)
+                noteViewModel.saveNote(etTitle.text.toString(), etDescription.text.toString(), etImage.text.toString(), npPriority.value)
                 Snackbar.make(view, R.string.message_note_saved, Snackbar.LENGTH_LONG).show()
             }
             findNavController().popBackStack()

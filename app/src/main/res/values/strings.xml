@@ -4,6 +4,7 @@
     <!-- Labels / Hints -->
     <string name="label_title">Title</string>
     <string name="label_description">Description</string>
+    <string name="label_image_url">Image URL</string>
     <string name="label_priority">Priority: </string>
     <string name="label_save">Save</string>
     <string name="label_test_email">notes@test.com</string>

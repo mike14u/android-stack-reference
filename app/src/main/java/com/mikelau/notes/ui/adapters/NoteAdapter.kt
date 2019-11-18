@@ -1,15 +1,14 @@
 package com.mikelau.notes.ui.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.mikelau.notes.R
 import com.mikelau.notes.data.models.Note
-import com.mikelau.notes.util.getColorPriority
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_note.*
 
@@ -21,7 +20,7 @@ class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteHolder>(DiffCallback()) {
         val currentNote: Note = getItem(position)
         holder.tvTitle.text = currentNote.title
         holder.tvDescription.text = currentNote.description
-        holder.viewPriority.setBackgroundColor(Color.parseColor(getColorPriority(currentNote.priority)))
+        holder.ivImage.load(currentNote.image) { crossfade(true) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {

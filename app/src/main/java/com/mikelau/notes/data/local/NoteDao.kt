@@ -10,7 +10,7 @@ interface NoteDao {
     @get:Query("SELECT * FROM note_table ORDER BY priority DESC")
     val allNotes: LiveData<List<Note>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: Note)
 
     @Update

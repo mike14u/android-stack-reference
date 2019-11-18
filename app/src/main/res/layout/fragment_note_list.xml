@@ -17,8 +17,8 @@
         android:id="@+id/rvMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
         android:clipToPadding="true"
+        android:paddingBottom="@dimen/medium"
         tools:listitem="@layout/item_note" />
 
 </FrameLayout>
